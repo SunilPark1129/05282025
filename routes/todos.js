@@ -67,3 +67,5 @@ router.delete("/:id", (req, res) => {
   // status(204).send() for not sending the content response
   res.json({ message: `Todo with id ${id} deleted successfully` });
 });
+
+module.exports = router;
