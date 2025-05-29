@@ -34,6 +34,7 @@ router.post("", (req, res) => {
     description: description || "",
     completed: false,
   };
+  todos.push(newTodo);
   res.status(201).json(newTodo);
 });
 
