@@ -2,7 +2,6 @@ const { Router } = require("express");
 const shortid = require("shortid");
 const { encryptPassword, comparePassword } = require("../util/password");
 const { signToken } = require("../util/token");
-const { userInfo } = require("os");
 
 const router = Router();
 
