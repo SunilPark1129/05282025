@@ -21,7 +21,7 @@ const users = [
 ];
 
 router.post("/register", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, role } = req.body;
 
   // if the input value is empty
   if (!username || !password) {
@@ -39,7 +39,7 @@ router.post("/register", (req, res) => {
   const newUser = {
     id: shortid.generate(),
     username,
-    role: "user", // default value for new users
+    role: role || "user", // default value for new users
     password: encryptPassword(password),
   };
 
@@ -64,11 +64,17 @@ router.post("/login", (req, res) => {
 
   const { password: _, ...userInfo } = user;
 
-  res.json({
+  res.cookie("token", signToken({ id, role }), { httpOnly: true }).json({
     message: "login successful",
     token: signToken(userInfo),
     user: { id: user.id, username: user.username },
   });
 });
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token").status(200).json({ message: "logout successful" });
+});
+
+router.post("/logout", (res, req) => {});
 
 module.exports = router;
