@@ -1,4 +1,4 @@
-function authroizeRoles(...roles) {
+function authorizeRoles(...roles) {
   return (req, res, next) => {
     console.log("Authorizing roles:", roles);
     console.log("Current user roles:", req.user);
@@ -11,3 +11,5 @@ function authroizeRoles(...roles) {
     });
   };
 }
+
+module.exports = authorizeRoles;
